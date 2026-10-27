@@ -10,6 +10,12 @@ import Staff from './pages/Staff'
 import Activity from './pages/Activity'
 import Fines from './pages/Fines'
 import History from './pages/History'
+import Strafen from './pages/Strafen'
+import DutyTF from './pages/DutyTF'
+import DutysInfos from './pages/DutysInfos'
+import MapDVN from './pages/MapDVN'
+import ShiftHistory from './pages/ShiftHistory'
+import ShiftCalendar from './pages/ShiftCalendar'
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, loading } = useAuth()
@@ -48,6 +54,12 @@ const AppRoutes: React.FC = () => {
         <Route path="activity" element={<Activity />} />
         <Route path="fines" element={<Fines />} />
         <Route path="history" element={<History />} />
+        <Route path="strafen" element={<Strafen />} />
+        <Route path="tf-duty" element={<DutyTF />} />
+        <Route path="dutys-infos" element={<DutysInfos />} />
+        <Route path="map" element={<MapDVN />} />
+        <Route path="shifthistory" element={<ShiftHistory />} />
+        <Route path="shiftcalendar" element={<ShiftCalendar />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

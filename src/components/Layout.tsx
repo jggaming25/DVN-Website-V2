@@ -11,7 +11,12 @@ import {
   LogOut,
   Menu,
   X,
-  Sparkles
+  Sparkles,
+  Gavel,
+  Train,
+  Info,
+  Map,
+  History
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import { getRoleColor, getRoleLabel } from '../lib/utils'
@@ -31,9 +36,15 @@ const Layout: React.FC = () => {
     { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/shifts', icon: Calendar, label: 'Schichten' },
     { path: '/duty', icon: Activity, label: 'Dienste' },
+    { path: '/strafen', icon: Gavel, label: 'Strafen' },
+    { path: '/tf-duty', icon: Train, label: 'TF-Dienste' },
+    { path: '/dutys-infos', icon: Info, label: 'Dienste & Infos' },
+    { path: '/map', icon: Map, label: 'Karte' },
+    { path: '/shifthistory', icon: History, label: 'Schichtverlauf' },
+    { path: '/shiftcalendar', icon: Calendar, label: 'Schichtkalender' },
     { path: '/staff', icon: Users, label: 'Mitarbeiter', adminOnly: false },
     { path: '/activity', icon: Activity, label: 'Activity' },
-    { path: '/fines', icon: AlertTriangle, label: 'Strafen' },
+    { path: '/fines', icon: AlertTriangle, label: 'Strafen (Alt)' },
     { path: '/history', icon: FileText, label: 'Verlauf' },
   ]
 
