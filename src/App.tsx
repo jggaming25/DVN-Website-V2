@@ -49,13 +49,12 @@ const AppRoutes: React.FC = () => {
       >
         <Route index element={<Dashboard />} />
         <Route path="shifts" element={<Shifts />} />
-        <Route path="duty" element={<Duty />} />
+        <Route path="duty" element={<DutyTF />} />
         <Route path="staff" element={<Staff />} />
         <Route path="activity" element={<Activity />} />
         <Route path="fines" element={<Fines />} />
         <Route path="history" element={<History />} />
         <Route path="strafen" element={<Strafen />} />
-        <Route path="tf-duty" element={<DutyTF />} />
         <Route path="dutys-infos" element={<DutysInfos />} />
         <Route path="map" element={<MapDVN />} />
         <Route path="shifthistory" element={<ShiftHistory />} />
