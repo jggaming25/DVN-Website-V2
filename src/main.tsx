@@ -6,7 +6,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('app')!).render(
   <React.StrictMode>
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter basename="/DVN-Website-V2/">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
