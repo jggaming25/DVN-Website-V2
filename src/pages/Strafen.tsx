@@ -10,15 +10,12 @@ const Strafen: React.FC = () => {
     { name: 'Onkel_Berndt', time: '4', reason: 'Fürs Lizenz Training Angemeldet, auch auf Nachfrage nicht erschienen, Bricht in Dispo ein', workedOff: '1', saldo: '3' },
     { name: 'Cduvsafd', time: '6,5', reason: 'Geht afk Während der Notbremse (blockiert Weidenheim), hp0, Spontane Abmeldung, falsche GSM-R Nummer, Abmeldung nach Frist(2h)', workedOff: '3,4', saldo: '3,1' },
     { name: 'Murmel', time: '1,5', reason: 'Verursacht Verspätung und hinterlegt selten Gleisänderungen', workedOff: '0', saldo: '1,5' },
-    { name: 'ZimoTT', time: '1', reason: 'Abmeldung nach Frist', workedOff: '0', saldo: '1' },
-    { name: 'Benito_Camel', time: '2', reason: 'HP0 Über, fährt durch den Bhf', workedOff: '0', saldo: '2' },
-    { name: 'Der_Sejdi', time: '1', reason: 'Unklare Kommunikation / Aggressiv', workedOff: '0', saldo: '1' },
-    { name: 'EisbärGamer', time: '2', reason: 'HP0', workedOff: '0', saldo: '2' },
-    { name: 'Doktor_Van_Watson', time: '2,5', reason: 'Abmeldung nach Frist, fährt durch Hp0', workedOff: '0', saldo: '2,5' },
-    { name: 'FiveSixThree', time: '1', reason: 'Abmeldung nach Frist', workedOff: '0', saldo: '1' },
-    { name: 'basti_fahrdienst', time: '1,5', reason: 'Abmeldung nach Frist', workedOff: '0', saldo: '1,5' },
-    { name: 'banditman05', time: '2', reason: 'HP0 Über', workedOff: '0', saldo: '2' },
-    { name: 'Fahrgast58', time: '1,5', reason: 'Abmeldung nach Frist', workedOff: '0', saldo: '1,5' },
+    { name: 'Finimal', time: '5', reason: 'Fährt auf HP0 auf, Fährt obwohl er nicht mehr auf dem Tfz sein soll, Leerpark mit RB Zugnummer, Liest Duty beschreibung nicht und sorgt für Verspätungen. Falsche GSMR nummer', workedOff: '2', saldo: '3' },
+    { name: 'JGGgaming', time: '1', reason: 'HP0', workedOff: '0', saldo: '1' },
+    { name: 'mahdiwt', time: '2', reason: 'Vergisst mehrmals zu blocken &amp; Telefon aufzulegen', workedOff: '0,5', saldo: '1,5' },
+    { name: 'Der_Hamster', time: '3,9', reason: 'HP0, Unerlaubte Hilfe beim Training/Betrug', workedOff: '2', saldo: '1,9' },
+    { name: 'Upstart190113', time: '3,5', reason: 'Hp0, Freche anlüge des HR Teams, zwangsschließen ohne ansage, Sagt einem Zug das er vor Plan abfahren soll', workedOff: '0', saldo: '3,5' },
+    { name: 'Hu_go', time: '3,5', reason: 'HP0, abmeldung nach frist, Trollt', workedOff: '0', saldo: '3,5' },
   ]
 
   return (
@@ -32,11 +29,11 @@ const Strafen: React.FC = () => {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent mb-2">
             Strafen
           </h1>
-          <p className="text-gray-400">Strafentabelle - Aktueller Stand</p>
+          <p className="text-gray-400">Strafentabelle</p>
         </div>
         <div className="px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-lg text-sm text-red-400">
           <Clock className="w-4 h-4 inline mr-2" />
-          Ab 4 Std. muss abgearbeitet werden
+          Wichtig! Ab 4 Std muss Abgearbeitet werden! Solltest du mehr als 4 Stunden haben kriegst du eine Frist und musst auf unter 4,0 Stunden abarbeiten!
         </div>
       </motion.div>
 
@@ -49,7 +46,7 @@ const Strafen: React.FC = () => {
         <div className="p-6 border-b border-red-500/30">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-5 h-5 text-red-400" />
-            <h2 className="text-xl font-semibold">Offene Strafen</h2>
+            <h2 className="text-xl font-semibold">Strafentabelle</h2>
           </div>
         </div>
         <div className="overflow-x-auto">
