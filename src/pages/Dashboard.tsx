@@ -1,32 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
-  Calendar, 
   Clock, 
   Users, 
   TrendingUp, 
   Award,
-  AlertCircle,
-  CheckCircle,
-  Activity
+  Activity,
+  Target
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
-import { formatMinutes, getRoleColor, getRoleLabel } from '../lib/utils'
+import { getRoleLabel } from '../lib/utils'
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth()
+  const [currentTime, setCurrentTime] = useState(new Date())
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000)
+    return () => clearInterval(timer)
+  }, [])
 
   const stats = [
-    { label: 'Aktive Schichten', value: '12', icon: Calendar, color: 'from-blue-500 to-cyan-500' },
-    { label: 'Meine Stunden (Monat)', value: '32.5h', icon: Clock, color: 'from-green-500 to-emerald-500' },
-    { label: 'Mitarbeiter Online', value: '24', icon: Users, color: 'from-purple-500 to-pink-500' },
-    { label: 'Activity Status', value: 'Erfüllt', icon: TrendingUp, color: 'from-orange-500 to-red-500' },
-  ]
-
-  const recentShifts = [
-    { id: 1, title: 'Frühschicht 06:00-14:00', date: 'Heute', status: 'active', participants: 5 },
-    { id: 2, title: 'Spätschicht 14:00-22:00', date: 'Heute', status: 'upcoming', participants: 4 },
-    { id: 3, title: 'Nachtschicht 22:00-06:00', date: 'Morgen', status: 'planned', participants: 3 },
+    { label: 'Mitarbeiter', value: '-', icon: Users, color: 'from-purple-500 to-pink-500' },
+    { label: 'Rolle', value: user ? getRoleLabel(user.role) : '-', icon: Award, color: 'from-blue-500 to-cyan-500' },
+    { label: 'Activity', value: '-', icon: Activity, color: 'from-green-500 to-emerald-500' },
+    { label: 'Status', value: 'Aktiv', icon: TrendingUp, color: 'from-orange-500 to-red-500' },
   ]
 
   const containerVariants = {
@@ -140,7 +138,7 @@ const Dashboard: React.FC = () => {
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Shifts */}
+        {/* Activity Ziel */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -149,51 +147,23 @@ const Dashboard: React.FC = () => {
         >
           <div className="p-6 border-b border-indigo-500/30">
             <div className="flex items-center gap-3">
-              <Calendar className="w-5 h-5 text-indigo-400" />
-              <h2 className="text-xl font-semibold">Aktuelle Schichten</h2>
+              <Target className="w-5 h-5 text-orange-400" />
+              <h2 className="text-xl font-semibold">Activity Ziel</h2>
             </div>
           </div>
           <div className="p-6 space-y-4">
-            {recentShifts.map((shift) => (
-              <motion.div
-                key={shift.id}
-                whileHover={{ x: 5 }}
-                className="flex items-center justify-between p-4 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 cursor-pointer"
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`w-2 h-2 rounded-full ${
-                    shift.status === 'active' ? 'bg-green-400 animate-pulse' :
-                    shift.status === 'upcoming' ? 'bg-yellow-400' : 'bg-gray-400'
-                  }`}></div>
-                  <div>
-                    <p className="font-medium">{shift.title}</p>
-                    <p className="text-sm text-gray-400">{shift.date} • {shift.participants} Teilnehmer</p>
-                  </div>
-                </div>
-                <div>
-                  {shift.status === 'active' && (
-                    <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-medium flex items-center gap-1">
-                      <Activity className="w-3 h-3" />
-                      Aktiv
-                    </span>
-                  )}
-                  {shift.status === 'upcoming' && (
-                    <span className="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs font-medium">
-                      Demnächst
-                    </span>
-                  )}
-                  {shift.status === 'planned' && (
-                    <span className="px-3 py-1 bg-gray-500/20 text-gray-400 rounded-full text-xs font-medium">
-                      Geplant
-                    </span>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+            <div className="flex items-center justify-between">
+              <span className="text-gray-400">Aktueller Monat</span>
+              <span className="text-sm font-medium">{currentTime.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' })}</span>
+            </div>
+            <div className="p-4 rounded-lg bg-orange-500/10 border border-orange-500/30 text-center">
+              <p className="text-lg font-semibold text-orange-400">Activity Ziel</p>
+              <p className="text-sm text-gray-400 mt-1">Wird aus der Activity Website Datenbank geladen</p>
+            </div>
           </div>
         </motion.div>
 
-        {/* Activity Overview */}
+        {/* Zeit */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -202,42 +172,16 @@ const Dashboard: React.FC = () => {
         >
           <div className="p-6 border-b border-indigo-500/30">
             <div className="flex items-center gap-3">
-              <TrendingUp className="w-5 h-5 text-green-400" />
-              <h2 className="text-xl font-semibold">Activity Übersicht</h2>
+              <Clock className="w-5 h-5 text-cyan-400" />
+              <h2 className="text-xl font-semibold">Zeit</h2>
             </div>
           </div>
-          <div className="p-6 space-y-6">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-400">Monatsziel</span>
-                <span className="text-sm font-medium">32.5 / 40 Std.</span>
+          <div className="p-6 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-4xl md:text-6xl font-mono font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
+                {currentTime.toLocaleTimeString('de-DE')}
               </div>
-              <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: '81.25%' }}
-                  transition={{ delay: 0.8, duration: 1 }}
-                  className="h-full bg-gradient-to-r from-green-500 to-emerald-500"
-                />
-              </div>
-              <p className="text-xs text-gray-400 mt-1">7.5 Stunden verbleibend</p>
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-green-500/10 border border-green-500/30">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                <div>
-                  <p className="text-sm font-medium">Ziel erfüllt</p>
-                  <p className="text-xs text-gray-400">Alle Anforderungen für diesen Monat erfüllt</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-blue-500/10 border border-blue-500/30">
-                <AlertCircle className="w-5 h-5 text-blue-400" />
-                <div>
-                  <p className="text-sm font-medium">Nächste Auswertung</p>
-                  <p className="text-xs text-gray-400">Ende des Monats</p>
-                </div>
-              </div>
+              <p className="text-gray-400">{currentTime.toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' })}</p>
             </div>
           </div>
         </motion.div>

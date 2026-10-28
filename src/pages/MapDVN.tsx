@@ -29,12 +29,8 @@ const MapDVN: React.FC = () => {
           <Map className="w-5 h-5 text-green-400" />
           <h2 className="text-xl font-semibold">Map DVN</h2>
         </div>
-        <div className="w-full h-[80vh]">
-          <iframe 
-            src={`${base}map_dvn.html`}
-            className="w-full h-full border-0"
-            title="Map DVN"
-          />
+        <div className="w-full">
+          <img src={`${base}map_dvn.jpg`} alt="DVN Map" className="w-full h-auto block" />
         </div>
       </motion.div>
     </div>
